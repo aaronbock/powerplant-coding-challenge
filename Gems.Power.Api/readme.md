@@ -27,6 +27,8 @@ is the main endpoint, and you can use the swagger tool to help you calling it
 
 If you want to use command line instead, try to run curl, with the following command:
 
+
+```
 curl -X 'POST' \
   'https://localhost:8888/ProductionPlan' \
   -H 'accept: */*' \
@@ -86,5 +88,6 @@ curl -X 'POST' \
   ]
 }
 '
+```
 
 [![.NET](https://github.com/aaronbock/powerplant-coding-challenge/actions/workflows/dotnet.yml/badge.svg)](https://github.com/aaronbock/powerplant-coding-challenge/actions/workflows/dotnet.yml)
