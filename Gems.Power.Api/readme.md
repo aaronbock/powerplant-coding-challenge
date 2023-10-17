@@ -86,3 +86,5 @@ curl -X 'POST' \
   ]
 }
 '
+
+[![.NET](https://github.com/aaronbock/powerplant-coding-challenge/actions/workflows/dotnet.yml/badge.svg)](https://github.com/aaronbock/powerplant-coding-challenge/actions/workflows/dotnet.yml)
