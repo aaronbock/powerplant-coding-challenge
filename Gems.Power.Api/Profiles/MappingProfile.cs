@@ -28,7 +28,7 @@ namespace Gems.Power.Api.Profiles
             var kerosine = GetFuel(src, KEROSINE, false);
             var wind = GetFuel(src, WIND, true);
 
-            dest.PowerPlants.ForEach(p => 
+            dest.PowerPlants.ToList().ForEach(p => 
             {
                 switch (p.Type)
                 {

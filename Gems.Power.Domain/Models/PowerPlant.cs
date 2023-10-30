@@ -31,17 +31,22 @@
         /// <summary>
         /// Get the total amount we can produce in this plant
         /// </summary>
-        public double AllProductionAvailable 
-        { 
-            get 
+        public double? AllProductionAvailable
+        {
+            get
             {
+                if (!OperatesWith.IsWind)
+                {
+                    return null;
+                }
+
                 // if the power plant is a wind one
                 // we need to use the % of wind to calculate the actual
                 // amount of energy generated
-                var windFactor = OperatesWith.IsWind ? OperatesWith.Price / 100 : 1;
+                var windFactor = OperatesWith.Price / 100;
 
                 return Math.Round(Pmax * Efficiency * windFactor, 2);
-            } 
+            }
         }
 
         /// <summary>
@@ -49,19 +54,27 @@
         /// </summary>
         /// <param name="targetLoad"></param>
         /// <returns></returns>
-        public double CalculateAvailableProduction(double targetLoad)
+        public bool TryToProduce(double targetLoad, out double output, out double minimumAllowed)
         {
             var upperLimit = Pmax;
-            var lowerLimit = Pmin;
+            minimumAllowed = Pmin;
 
             if (targetLoad > upperLimit)
-                return upperLimit;
+            {
+                output = upperLimit;
+                return true;
+            }
 
             // we cannot try to consume less energy from a plant than allowed
-            if (targetLoad < lowerLimit)
-                return 0;
+            if (targetLoad < minimumAllowed)
+            {
+                output = 0;
+                return false;
+            }
 
-            return targetLoad;
+            output = targetLoad;
+
+            return true;
         }
 
     }
